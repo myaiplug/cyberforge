@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CyberForge · Newton Field | NoDAW Labs</title>
+<meta name="description" content="CyberForge is a production design system for audio tools: Cyber-HUD tokens, Newton anti-gravity motion, and ten plugin skins. Built by NoDAW Labs." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{--void:#07080c;--ink:#ece8df;--mute:#9a958b;--line:rgba(236,232,223,.12);--cyan:#7ee7ff;--mag:#ff4d9a;--gold:#e7c27a;--glass:rgba(14,16,22,.62);--ease:cubic-bezier(.22,1,.36,1)}
+html.light{--void:#f4f1ea;--ink:#14151a;--mute:#5d5a54;--line:rgba(20,21,26,.12);--glass:rgba(255,255,255,.62)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--void);color:var(--ink);font-family:Geist,Segoe UI,sans-serif;letter-spacing:-.01em;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(126,231,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(126,231,255,.035) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%);z-index:0}
+a{color:inherit;text-decoration:none}button,a{cursor:pointer}
+.cursor{position:fixed;width:18px;height:18px;border:1px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:80;mix-blend-mode:difference;transform:translate(-50%,-50%)}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--mag));z-index:90}
+nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:color-mix(in srgb,var(--void) 72%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.mark{font-family:IBM Plex Mono,monospace;font-size:12px;letter-spacing:.28em}.nav-links{display:flex;gap:22px;font-size:13px;color:var(--mute)}.nav-links a:hover{color:var(--ink)}
+.toggle{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px}
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 28px}
+.hero{min-height:calc(100vh - 64px);display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:48px 0 72px}
+.kicker{font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase}
+h1{font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(64px,8vw,112px);line-height:.86;margin:16px 0 18px;letter-spacing:-.04em}h1 em{font-style:italic;color:var(--gold)}
+.lede{max-width:520px;font-size:18px;line-height:1.5;color:var(--mute)}.actions{display:flex;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:14px 20px;font-size:14px;border:1px solid transparent;transition:transform .35s var(--ease)}
+.btn.primary{background:var(--ink);color:var(--void)}.btn.ghost{border-color:var(--line)}.btn:hover{transform:translateY(-3px)}
+.stage{position:relative;height:560px;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(500px 280px at 60% 40%,rgba(126,231,255,.14),transparent 60%),radial-gradient(300px 220px at 30% 70%,rgba(255,77,154,.12),transparent 60%),#0b0d12}
+html.light .stage{background:radial-gradient(500px 280px at 60% 40%,rgba(0,140,180,.12),transparent 60%),#efeae1}
+canvas{width:100%;height:100%;display:block}
+.hud{position:absolute;left:18px;bottom:18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:.08em;color:var(--cyan);background:rgba(0,0,0,.35);border:1px solid rgba(126,231,255,.25);padding:10px 12px;border-radius:12px;backdrop-filter:blur(8px)}
+section{padding:88px 0;border-top:1px solid var(--line)}h2{font-family:Instrument Serif,serif;font-size:clamp(40px,5vw,68px);font-weight:400;line-height:.95;margin:10px 0 28px}
+.styles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.chip{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 12px;font-size:12px}.chip.on{border-color:var(--cyan);color:var(--cyan)}
+.preview{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.skin,.spec{border:1px solid var(--line);border-radius:22px;min-height:280px;padding:22px;background:var(--glass);backdrop-filter:blur(16px)}
+.knobs{display:flex;gap:18px;margin-top:28px}.knob{width:72px;height:72px;border-radius:50%;border:1px solid var(--line);position:relative;background:conic-gradient(from 210deg,var(--cyan),transparent 70%)}
+.knob::after{content:"";position:absolute;inset:14px;border-radius:50%;background:#111}.meter{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:18px}.meter span{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--cyan),var(--mag))}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:22px;padding:22px;min-height:180px;transition:transform .4s var(--ease),border-color .4s}.card:hover{transform:translateY(-8px);border-color:rgba(126,231,255,.45)}.card p{color:var(--mute);line-height:1.5}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end}.amount{font-family:Instrument Serif,serif;font-size:92px;line-height:.8}
+footer{padding:28px;border-top:1px solid var(--line);color:var(--mute);font-size:12px;display:flex;justify-content:space-between}
+@media(max-width:900px){.hero,.preview,.grid3,.price{grid-template-columns:1fr}.stage{height:380px}.nav-links,.cursor{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+<div class="cursor" id="cur"></div>
+<nav><div class="mark">CYBERFORGE / NODAW</div><div class="nav-links"><a href="#skins">Skins</a><a href="#kit">Kit</a><a href="#buy">License</a></div><button class="toggle" id="theme">Light</button></nav>
+<main>
+<div class="wrap hero"><div><div class="kicker">Design system · motion kit · plugin skins</div><h1>Newton<br><em>field.</em></h1><p class="lede">Not a glow stylesheet. A working visual language for audio tools: Cyber-HUD tokens, zero-g motion, and ten plugin skins you can drop into an AI model or a React codebase.</p><div class="actions"><a class="btn primary" href="https://github.com/myaiplug/cyberforge">Open the kit</a><a class="btn ghost" href="#skins">Switch a skin</a></div></div><div class="stage" id="stage"><canvas id="field"></canvas><div class="hud" id="hud">FIELD IDLE</div></div></div>
+<section id="skins"><div class="wrap"><div class="kicker">System 04</div><h2>Ten skins. One instrument.</h2><div class="styles" id="chips"></div><div class="preview"><div class="skin" id="skin"><div class="kicker" id="skinName">Dark reactor</div><div class="knobs"><div class="knob"></div><div class="knob"></div><div class="knob"></div></div><div class="meter"><span id="meter"></span></div></div><div class="spec"><div class="kicker">What changes</div><h3 id="skinTitle" style="font-family:Instrument Serif,serif;font-size:36px;font-weight:400">Reactor</h3><p id="skinCopy" style="color:var(--mute);line-height:1.55">Cyan HUD lines, inset meters, LED states. The base language every other skin inherits.</p></div></div></div></section>
+<section id="kit"><div class="wrap"><div class="kicker">Inside the kit</div><h2>What you actually get.</h2><div class="grid3"><article class="card"><h3>Newton field</h3><p>Levitating mass, cursor repulsion, slow drift. A canvas field you can fork, not a single keyframe bounce.</p></article><article class="card"><h3>Cyber-HUD tokens</h3><p>Void, ink, cyan, magenta, gold. Serif display, mono labels. Glow only when a control is active.</p></article><article class="card"><h3>Plugin skins</h3><p>Void, glitch, holographic, reactor, tape, spectral, bevel, magenta, decay, crystal. Each is a prompt plus a visual recipe.</p></article></div></div></section>
+<section id="buy"><div class="wrap price"><div><div class="kicker">Commercial license</div><div class="amount">$79</div><p style="color:var(--mute);max-width:420px">One purchase. Use it in client work and shipped products. Do not resell the kit as a competing system.</p></div><div><a class="btn primary" href="https://github.com/myaiplug/cyberforge">Get the files</a><p style="color:var(--mute);font-size:13px;margin-top:16px">Prompts live in systems/opencode-newton and systems/plugin-styles.</p></div></div></section>
+</main>
+<footer><span>NoDAW Labs · Louisville</span><span>CyberForge · 2026</span></footer>
+<script>
+const skins=[{id:"reactor",name:"Dark reactor",title:"Reactor",copy:"Cyan HUD lines, inset meters, LED states. The base language.",bg:"linear-gradient(160deg,#10141c,#07090e)",accent:"#7ee7ff"},{id:"void",name:"Neumorphic void",title:"Void",copy:"Soft extrusion, matte mass, almost no neon. Depth comes from shadow.",bg:"linear-gradient(160deg,#1a1c22,#0e1014)",accent:"#c8c2b6"},{id:"glitch",name:"Chromatic glitch",title:"Glitch",copy:"Split channels, short offset, scan noise. A state, not a wallpaper.",bg:"linear-gradient(160deg,#1a0b16,#07080c)",accent:"#ff4d9a"},{id:"holo",name:"Holographic",title:"Holo",copy:"Glass panel, iridescent edge, floating labels.",bg:"linear-gradient(160deg,#14202a,#0b1016)",accent:"#b8fff2"},{id:"tape",name:"Tape HUD",title:"Tape",copy:"Analog grain over a digital frame. Labels wear. Sliders stay precise.",bg:"linear-gradient(160deg,#2a2218,#120e0b)",accent:"#e7c27a"},{id:"spectral",name:"Spectral glass",title:"Spectral",copy:"Stem colors as material: magenta vocal, gold music, cyan air.",bg:"linear-gradient(160deg,#1a1230,#0c1018)",accent:"#d7a6ff"},{id:"bevel",name:"Void bevel",title:"Bevel",copy:"Metal edge, inset meter, physical knob.",bg:"linear-gradient(160deg,#2a2d33,#111216)",accent:"#f2f2f2"},{id:"magenta",name:"Magenta reactor",title:"Magenta",copy:"Cyan for data, magenta for energy.",bg:"linear-gradient(160deg,#24101a,#0c0a10)",accent:"#ff4d9a"},{id:"decay",name:"Tape decay",title:"Decay",copy:"Worn type, lower contrast, still a working panel.",bg:"linear-gradient(160deg,#3a3128,#1a1612)",accent:"#d8b48a"},{id:"crystal",name:"Crystal grid",title:"Crystal",copy:"Hard grid, bright edge, cold highlights.",bg:"linear-gradient(160deg,#101820,#070b10)",accent:"#9be7ff"}];
+const chips=document.getElementById("chips"), skin=document.getElementById("skin");
+skins.forEach((s,i)=>{const b=document.createElement("button");b.className="chip"+(i===0?" on":"");b.textContent=s.name;b.onclick=()=>{document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));b.classList.add("on");skin.style.background=s.bg;skin.style.borderColor=s.accent;document.getElementById("skinName").textContent=s.name;document.getElementById("skinTitle").textContent=s.title;document.getElementById("skinCopy").textContent=s.copy;document.getElementById("meter").style.width=(40+i*5)+"%";document.getElementById("meter").style.background=s.accent;};chips.appendChild(b);});
+document.getElementById("theme").onclick=()=>{document.documentElement.classList.toggle("light");document.getElementById("theme").textContent=document.documentElement.classList.contains("light")?"Dark":"Light";};
+const cur=document.getElementById("cur");window.addEventListener("pointermove",e=>{cur.style.left=e.clientX+"px";cur.style.top=e.clientY+"px";});
+window.addEventListener("scroll",()=>{const h=document.documentElement.scrollHeight-innerHeight;document.getElementById("bar").style.width=(scrollY/h*100)+"%";});
+const canvas=document.getElementById("field"), ctx=canvas.getContext("2d"), stage=document.getElementById("stage");
+let pts=[], mx=0, my=0, inside=false;
+function resize(){canvas.width=stage.clientWidth*devicePixelRatio;canvas.height=stage.clientHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);}resize();addEventListener("resize",resize);
+stage.addEventListener("pointermove",e=>{const r=stage.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;inside=true;});
+stage.addEventListener("pointerleave",()=>inside=false);
+for(let i=0;i<90;i++) pts.push({x:Math.random()*stage.clientWidth,y:Math.random()*stage.clientHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:1+Math.random()*2.2});
+function frame(){const w=stage.clientWidth,h=stage.clientHeight;ctx.clearRect(0,0,w,h);const apple={x:w*.62+Math.sin(performance.now()/1400)*18,y:h*.38+Math.cos(performance.now()/1700)*14};pts.forEach(p=>{if(inside){const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy)||1;if(d<140){p.vx+=dx/d*.35;p.vy+=dy/d*.35;}}p.vx*=.98;p.vy*=.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.fillStyle="rgba(126,231,255,.75)";ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});ctx.beginPath();ctx.strokeStyle="rgba(231,194,122,.85)";ctx.lineWidth=1.2;ctx.arc(apple.x,apple.y,10,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(apple.x,apple.y-10);ctx.quadraticCurveTo(apple.x+8,apple.y-18,apple.x+4,apple.y-8);ctx.stroke();document.getElementById("hud").textContent=inside?"REPULSE ACTIVE":"FIELD IDLE";requestAnimationFrame(frame);}frame();
+</script>
+</body>
+</html>
